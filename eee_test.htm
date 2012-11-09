@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>.wrap() &#8211; jQuery API</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <script type="text/javascript" src='jquery.js' ></script>
+  <script type="text/javascript" src='underscore-min.js' ></script>
+<script type="text/javascript" src='english-7000.js' ></script>
+  <script type="text/javascript" src='eee.js' ></script>
+
+</head>
+
+<body id="jq-interior" class="api-jquery-com single">
+
+
+  <div id="jq-siteContain">
+      <div id="jq-header">
+        <a id="jq-siteLogo" href="http://jquery.com/" title="jQuery Home"></a>
+        <div id="jq-primaryNavigation">
+          <ul>
+<li class="jq-jquery jq-current"><a href="http://jquery.com/" title="jQuery Home">jQuery</a></li>
+<li class="jq-ui"><a href="http://jqueryui.com/" title="jQuery UI">UI</a></li>
+<li class="jq-mobile"><a href="http://jquerymobile.com/" title="jQuery Mobile">Mobile</a></li>
+<li class="jq-meetup"><a href="http://meetups.jquery.com/" title="jQuery Meetups">Meetups</a></li>
+<li class="jq-forum"><a href="http://forum.jquery.com/" title="jQuery Forum">Forum</a></li>
+<li class="jq-blog"><a href="http://blog.jquery.com/" title="jQuery Blog">Blog</a></li>
+<li class="jq-about"><a href="http://jquery.org/about" title="About jQuery">About</a></li>
+<li class="jq-donate"><a href="http://jquery.org/donate" title="Donate to jQuery">Donate</a></li>
+          </ul>
+        </div><!-- /#primaryNavigation -->
+
+        <div id="jq-secondaryNavigation">
+          <ul>
+            <li class="jq-download jq-first"><a href="http://docs.jquery.com/Downloading_jQuery">Download</a></li>
+            <li class="jq-documentation jq-current"><a href="http://docs.jquery.com/">Documentation</a></li>
+            <li class="jq-tutorials"><a href="http://docs.jquery.com/Tutorials">Tutorials</a></li>
+            <li class="jq-bugTracker"><a href="http://bugs.jquery.com/">Bug Tracker</a></li>
+            <li class="jq-discussion jq-last"><a href="http://docs.jquery.com/Discussion">Discussion</a></li>
+          </ul>
+        </div><!-- /#secondaryNavigation -->
+
+
+
+        <form id="jq-primarySearchForm" action="http://api.jquery.com" method="get" autocomplete="off">
+          <div>
+            <input type="hidden" value="1" name="ns0"/>
+            <label for="jq-primarySearch">Search <span class="jq-jquery">jQuery</span></label>
+            <input type="text" value="" accesskey="f" title="Search jQuery" name="s" id="jq-primarySearch" class=""/>
+            <button type="submit" name="go" id="jq-searchGoButton"><span>Go</span></button>
+          </div>
+        </form>
+
+<!--
+        <h1 id="blog-title"><span><a href="http://api.jquery.com/" title="jQuery API" rel="home">jQuery API</a></span></h1>
+        <div id="blog-description">jQuery API Reference</div>
+-->
+        <h1>jQuery API</h1>
+
+
+      </div><!-- /#header -->
+
+      <div id="jq-content" class="jq-clearfix">
+
+
+  <div id="access">
+    <div class="skip-link"><a href="#content" title="Skip to content">Skip to content</a></div>
+    <div id="menu"><ul><li class="page_item page-item-1295"><a href="http://api.jquery.com/api/">api</a></li><li class="page_item page-item-1772"><a href="http://api.jquery.com/jsonp/">jsonp</a></li><li class="page_item page-item-3413"><a href="http://api.jquery.com/Types/">Types</a></li><li class="page_item page-item-3608"><a href="http://api.jquery.com/extending-ajax/">Extending Ajax: Prefilters, Converters, and Transports</a></li></ul></div>
+  </div>
+<!-- #access -->
+
+  <div id="jq-primaryContent">
+    <div id="content">
+
+      <div id="post-160" class="hentry p1 post publish category-dom-insertion-around category-1.0 category-1.4 untagged y2009 m11 d14 h01">
+        <div class="entry-content<?= $banner_wrap; ?>">
+        <div class="entry-title roundTop">
+          
+          <h1 class="jq-clearfix">.wrap()</h1>
+          <div class="entry-meta jq-clearfix">
+                        Categories:
+            <span class="category"><a href="http://api.jquery.com/category/manipulation/" title="View all posts in Manipulation">Manipulation</a> &gt; <a href="http://api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts in DOM Insertion, Around">DOM Insertion, Around</a></span>
+  
+
+          </div>
+
+</div>
+<div id="wrap1" class="entry method">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.wrap( wrappingElement )</span> <span class="returns">Returns: <a class="return" href="http://api.jquery.com/Types/#jQuery">jQuery</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>Wrap an HTML structure around each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="wrap-wrappingElement">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.wrap( wrappingElement )</h4>
+<p class="arguement"><strong>wrappingElement</strong>An HTML snippet, selector expression, jQuery object, or DOM element specifying the structure to wrap around the matched elements.</p>
+</li>
+<li class="signature" id="wrap-functionindex">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.wrap( function(index) )</h4>
+<p class="arguement"><strong>function(index)</strong>A callback function returning the HTML content or jQuery object to wrap around the matched elements. Receives the index position of the element in the set as an argument. Within the function, <code>this</code> refers to the current element in the set.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.wrap()</code> function can take any string or object that could be passed to the <code>$()</code> factory function to specify a DOM structure. This structure may be nested several levels deep, but should contain only one inmost element. A copy of this structure will be wrapped around each of the elements in the set of matched elements. This method returns the original set of elements for chaining purposes.</p>
+<p>Consider the following HTML:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>Using <code>.wrap()</code>, we can insert an HTML structure around the inner <code>&lt;div&gt;</code> elements like so:</p>
+<pre>$('.inner').wrap('&lt;div class="new" /&gt;');</pre>
+<p>The new <code>&lt;div&gt;</code> element is created on the fly and added to the DOM. The result is a new <code>&lt;div&gt;</code> wrapped around each matched element:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="new"&gt;
+    &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="new"&gt;
+    &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>The second version of this method allows us to instead specify a callback function. This callback function will be called once for every matched element; it should return a DOM element, jQuery object, or HTML snippet in which to wrap the corresponding element. For example:</p>
+<pre>$('.inner').wrap(function() {
+  return '&lt;div class="' + $(this).text() + '" /&gt;';
+});</pre>
+<p>This will cause each <code>&lt;div&gt;</code> to have a class corresponding to the text it wraps:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="Hello"&gt;
+    &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="Goodbye"&gt;
+    &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+<h3>Examples:</h3>
+<div class="entry-examples" id="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Wrap a new div around all of the paragraphs.</span>
+</h4>
+<pre class="prettyprint"><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").wrap("&lt;div&gt;&lt;/div&gt;");&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Wraps a newly created tree of objects around the spans.  Notice anything in between the spans gets left out like the &lt;strong&gt; (red text) in this example.  Even the white space between spans is left out.  Click View Source to see the original html.</span>
+</h4>
+<pre class="prettyprint"><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { border:2px blue solid; margin:2px; padding:2px; }
+  p { background:yellow; margin:2px; padding:2px; }
+  strong { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;span&gt;Span Text&lt;/span&gt;
+  &lt;strong&gt;What about me?&lt;/strong&gt;
+  &lt;span&gt;Another One&lt;/span&gt;
+&lt;script&gt;$("span").wrap("&lt;div&gt;&lt;div&gt;&lt;p&gt;&lt;em&gt;&lt;b&gt;&lt;/b&gt;&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;");&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Wrap a new div around all of the paragraphs.</span>
+</h4>
+<pre class="prettyprint"><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").wrap(document.createElement("div"));&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Wrap a jQuery object double depth div around all of the paragraphs.  Notice it doesn't move the object but just clones it to wrap around its target.</span>
+</h4>
+<pre class="prettyprint"><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { border: 2px solid blue; margin:2px; padding:2px; }
+  .doublediv { border-color:red; }
+  p { background:yellow; margin:4px; font-size:14px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+  &lt;div class="doublediv"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;$("p").wrap($(".doublediv"));&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+        </div>
+      </div><!-- .post -->
+    <h1 id="comments" class="roundTop section-title">Support and Contributions</h1>
+<div class="jq-box roundBottom">
+  <p>Need help with <strong><?= the_title(); ?></strong> or have a question about it? Visit the <a href="http://forum.jquery.com/">jQuery Forum</a> or the <strong>#jquery</strong> channel on <a href="irc://irc.freenode.net/">irc.freenode.net</a>.</p>
+  <p>Think you've discovered a jQuery bug related to <strong><?= the_title(); ?></strong>? <a href="http://docs.jquery.com/How_to_Report_Bugs">Report it</a> to the jQuery core team.</p>
+  <p>Found a problem with this documentation? <a href="https://github.com/jquery/api.jquery.com/issues">Report it</a> on the GitHub issue tracker</p>
+
+  <!-- <ul class="comment-instructions">
+    <li><h3 style="margin-top: 0; font-size: 1.4em">Support requests, bug reports, and off-topic comments will be <em>deleted</em> without warning.</h3></li>
+    <li>Please do post corrections or additional examples for .wrap() below. We aim to quickly move corrections into the documentation.</li>
+    <li>If you need help, post at the <a href="http://forum.jquery.com/">forums</a> or in the #jquery IRC channel.</li>
+    <li>Report bugs on the <a href="http://dev.jquery.com/newticket/">bug tracker</a> or the <a href="http://forum.jquery.com/developing-jquery-core">jQuery Forum</a>.</li>
+    <li>Discussions about the API specifically should be addressed in the <a href="http://forum.jquery.com/developing-jquery-core">Developing jQuery Core forum</a>.</li>
+  </ul> -->
+<div style="margin-top:2em;">
+
+<div id="disqus_thread">
+                    <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-10359">
+        <div id="dsq-comment-header-10359" class="dsq-comment-header">
+            <cite id="dsq-cite-10359">
+http://twitter.com/michl86                <span id="dsq-author-user-10359">michl86</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-10359" class="dsq-comment-body">
+            <div id="dsq-comment-message-10359" class="dsq-comment-message"><p>wrap (and wrapAll) only works if the element has a parentNode. you should remind this when creating new structures. the creation of a simple list with anchors is a good example.</p>
+<p>&#x76;&#x61;&#x72;&#x20;&#x6E;&#x61;&#x6D;&#x65;&#x73;&#x20;&#x3D;&#x20;&#x5B;&#x22;&#x4D;&#x69;&#x63;&#x68;&#x61;&#x65;&#x6C;&#x22;&#x2C;&#x20;&#x22;&#x41;&#x72;&#x6E;&#x6F;&#x6C;&#x64;&#x22;&#x2C;&#x20;&#x22;&#x41;&#x6E;&#x64;&#x72;&#x65;&#x61;&#x73;&#x22;&#x5D;&#x3B;</p>
+<p>&#x76;&#x61;&#x72;&#x20;&#x6C;&#x69;&#x73;&#x74;&#x20;&#x3D;&#x20;&#x24;&#x28;&#x22;&#x3C;&#x75;&#x6C;&#x20;&#x2F;&#x3E;&#x22;&#x2C;&#x20;&#x7B;<br />
+&nbsp;&nbsp;&nbsp;&#x9;&#x22;&#x69;&#x64;&#x22;&#x3A;&#x20;&#x22;&#x6E;&#x65;&#x77;&#x73;&#x22;<br />
+&#x7D;&#x29;&#x3B;</p>
+<p>&#x24;&#x28;&#x6E;&#x61;&#x6D;&#x65;&#x73;&#x29;&#x2E;&#x65;&#x61;&#x63;&#x68;&#x28;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x28;&#x69;&#x6E;&#x64;&#x65;&#x78;&#x2C;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x29;&#x20;&#x7B;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&#x9;&#x24;&#x28;&#x22;&#x3C;&#x61;&#x20;&#x2F;&#x3E;&#x22;&#x2C;&#x20;&#x7B;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x9;&#x68;&#x72;&#x65;&#x66;&#x3A;&#x22;&#x68;&#x74;&#x74;&#x70;&#x3A;&#x2F;&#x2F;&#x77;&#x77;&#x77;&#x2E;&#x67;&#x6F;&#x6F;&#x67;&#x6C;&#x65;&#x2E;&#x64;&#x65;&#x22;&#x2C;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x9;&#x74;&#x65;&#x78;&#x74;&#x3A;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&#x9;&#x7D;&#x29;<br />
+<strong>&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x2E;&#x77;&#x72;&#x61;&#x70;&#x28;&#x22;&#x3C;&#x6C;&#x69;&#x20;&#x2F;&#x3E;&#x22;&#x29;&#x3B;</strong><br />
+<strong>&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x2E;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&#x54;&#x6F;&#x28;&#x6C;&#x69;&#x73;&#x74;&#x29;</strong><br />
+&#x7D;&#x29;&#x3B;</p>
+<p>&#x6C;&#x69;&#x73;&#x74;&#x2E;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&#x54;&#x6F;&#x28;&#x22;&#x23;&#x63;&#x6F;&#x6E;&#x74;&#x22;&#x29;&#x3B;</p>
+<p>this wont work, because the a has no parent element. you have to switch the function order.</p>
+<p>&#x24;&#x28;&#x6E;&#x61;&#x6D;&#x65;&#x73;&#x29;&#x2E;&#x65;&#x61;&#x63;&#x68;&#x28;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x28;&#x69;&#x6E;&#x64;&#x65;&#x78;&#x2C;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x29;&#x20;&#x7B;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&#x9;&#x24;&#x28;&#x22;&#x3C;&#x61;&#x20;&#x2F;&#x3E;&#x22;&#x2C;&#x20;&#x7B;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x9;&#x68;&#x72;&#x65;&#x66;&#x3A;&#x22;&#x68;&#x74;&#x74;&#x70;&#x3A;&#x2F;&#x2F;&#x77;&#x77;&#x77;&#x2E;&#x67;&#x6F;&#x6F;&#x67;&#x6C;&#x65;&#x2E;&#x64;&#x65;&#x22;&#x2C;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x9;&#x74;&#x65;&#x78;&#x74;&#x3A;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#xA;<br />
+&nbsp;&nbsp;&nbsp;&#x9;&#x7D;&#x29;<br />
+<strong>&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x2E;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&#x54;&#x6F;&#x28;&#x6C;&#x69;&#x73;&#x74;&#x29;</strong><br />
+<strong>&nbsp;&nbsp;&nbsp;&nbsp;&#x9;&#x2E;&#x77;&#x72;&#x61;&#x70;&#x28;&#x22;&#x3C;&#x6C;&#x69;&#x20;&#x2F;&#x3E;&#x22;&#x29;&#x3B;</strong><br />
+&#x7D;&#x29;&#x3B;</p>
+<p>then every anchor has already the <code>ul</code> as parent and wrap can do it&#8217;s job. it would be nice if this could be changed in the jquery core, because the first snippet is much more easier to read.</p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment odd alt depth-2" id="dsq-comment-10688">
+        <div id="dsq-comment-header-10688" class="dsq-comment-header">
+            <cite id="dsq-cite-10688">
+                <span id="dsq-author-user-10688">Anonymous</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-10688" class="dsq-comment-body">
+            <div id="dsq-comment-message-10688" class="dsq-comment-message"><p>I don&#8217;t think that it&#8217;s a bug or something like that. You can&#8217;t wrap element if it&#8217;s not in DOM structure and this way is quite logical.</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+    <li class="comment even depth-2" id="dsq-comment-5668">
+        <div id="dsq-comment-header-5668" class="dsq-comment-header">
+            <cite id="dsq-cite-5668">
+                <span id="dsq-author-user-5668">LukeMaurer</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5668" class="dsq-comment-body">
+            <div id="dsq-comment-message-5668" class="dsq-comment-message"><p>Actually, even if jQuery added the ability you suggest to wrap a parentless element (presumably by simply giving it a parent), your first example wouldn&#39;t work, for the reason buzz mentions above — you&#39;d wind up wrapping the element only to unwrap it again when you append it.</p>
+<p>CTTOI, though, you could always do as buzz suggests, and put in a &#8220;.parent()&#8221; before the &#8220;.appendTo(list)&#8221;; in fact I think doing so would make it a little clearer what&#39;s going on. So yeah, I agree that wrapping orphans is a good idea.</p>
+<p>(/me hopes that last sentence never comes up when he runs for office <img src='http://api.jquery.com/wp-includes/images/smilies/icon_biggrin.gif' alt=':-D' class='wp-smiley' />  )</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-2571">
+        <div id="dsq-comment-header-2571" class="dsq-comment-header">
+            <cite id="dsq-cite-2571">
+                <span id="dsq-author-user-2571">Buczkó Mátyás (buzz)</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2571" class="dsq-comment-body">
+            <div id="dsq-comment-message-2571" class="dsq-comment-message"><p>Don&#39;t forget that if you create an element, wrap something around it and then insert it to the DOM structure you will lose the wrapped object as parent. </p>
+<p>If you do it like this:<br />$(&#39;<a rel="nofollow">&#8230;</a>&#39;).wrap(&#8220;&lt;li/&gt;&#8221;).parent().appendTo(ul);</p>
+<p>It will work. Any unlinked element can be wrapped, but don&#39;t forget to step one level up before inserting it to the DOM!</p>
+<p>Unlinked elements are node trees themselves.</p>
+<p>If there is any bug, it could be questioned, why doesn&#39;t the function return with the set of the new parent elements instead of the input set (like clone). But of course it could lead to other problems.</p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment even depth-2" id="dsq-comment-2963">
+        <div id="dsq-comment-header-2963" class="dsq-comment-header">
+            <cite id="dsq-cite-2963">
+                <span id="dsq-author-user-2963">carloslm</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2963" class="dsq-comment-body">
+            <div id="dsq-comment-message-2963" class="dsq-comment-message"><p>It&#39;s better to add the element to the DOM first and then wrap it:</p>
+<p>$(document.createTextNode(&#39;Hello&#39;))<br />.prependTo(&#39;body&#39;)<br />.wrap(&#39;&#60;h1&#62;&#60;i&#62;&#60;del&#62;&#39;);</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-3046">
+        <div id="dsq-comment-header-3046" class="dsq-comment-header">
+            <cite id="dsq-cite-3046">
+http://twitter.com/mspreij                <span id="dsq-author-user-3046">M Spreij</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3046" class="dsq-comment-body">
+            <div id="dsq-comment-message-3046" class="dsq-comment-message"><p>Note that .wrap(&#39;span&#39;) has an *entirely* different result than .wrap(&#39;<span>&#39;). The latter will wrap the object in <span> tags, the first seems to look for the first span tag in the document and use a copy of that, including any content of that span tag. Quite confusing if you don&#39;t know this <img src='http://api.jquery.com/wp-includes/images/smilies/icon_smile.gif' alt=':-)' class='wp-smiley' /> </span></span></p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment even depth-2" id="dsq-comment-6461">
+        <div id="dsq-comment-header-6461" class="dsq-comment-header">
+            <cite id="dsq-cite-6461">
+http://twitter.com/wconcepts                <span id="dsq-author-user-6461">Colin Williams</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6461" class="dsq-comment-body">
+            <div id="dsq-comment-message-6461" class="dsq-comment-message"><p>$.wrap(&#39;&lt;span&gt;&#39;) would be more appropriate. Remember that the argument is &#8220;An HTML snippet, selector expression, jQuery object, or DOM element specifying the structure to wrap around the matched elements.&#8221;</p>
+<p>&#8230; Actually, I think your comment made that point but suffered from the &lt;span&gt; being interpreted in your comment and not displayed..</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3115">
+        <div id="dsq-comment-header-3115" class="dsq-comment-header">
+            <cite id="dsq-cite-3115">
+                <span id="dsq-author-user-3115">scottSEA</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3115" class="dsq-comment-body">
+            <div id="dsq-comment-message-3115" class="dsq-comment-message"><p>So after the wrap operation, does the returned jQuery object include the new wrapping elements or just the original element?</p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment even depth-2" id="dsq-comment-6883">
+        <div id="dsq-comment-header-6883" class="dsq-comment-header">
+            <cite id="dsq-cite-6883">
+                <span id="dsq-author-user-6883">AnupamKhurana</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6883" class="dsq-comment-body">
+            <div id="dsq-comment-message-6883" class="dsq-comment-message"><p>It returns the original element.</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-12248">
+        <div id="dsq-comment-header-12248" class="dsq-comment-header">
+            <cite id="dsq-cite-12248">
+                <span id="dsq-author-user-12248">Laxmi Karavadi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-12248" class="dsq-comment-body">
+            <div id="dsq-comment-message-12248" class="dsq-comment-message"><p>Can the wrap function be used for wrapping more than one elements ie. all the divs in the body should be surrounded by 1 wrapper, something lke a border to all the divs?</p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment even depth-2" id="dsq-comment-5299">
+        <div id="dsq-comment-header-5299" class="dsq-comment-header">
+            <cite id="dsq-cite-5299">
+                <span id="dsq-author-user-5299">Neil</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5299" class="dsq-comment-body">
+            <div id="dsq-comment-message-5299" class="dsq-comment-message"><p>That would be .wrapInner()</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7877">
+        <div id="dsq-comment-header-7877" class="dsq-comment-header">
+            <cite id="dsq-cite-7877">
+                <span id="dsq-author-user-7877">AnupamKhurana</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7877" class="dsq-comment-body">
+            <div id="dsq-comment-message-7877" class="dsq-comment-message"><p>It returns the original element.</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+    <li class="comment even thread-even depth-1" id="dsq-comment-8295">
+        <div id="dsq-comment-header-8295" class="dsq-comment-header">
+            <cite id="dsq-cite-8295">
+                <span id="dsq-author-user-8295">hitautodestruct</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8295" class="dsq-comment-body">
+            <div id="dsq-comment-message-8295" class="dsq-comment-message"><p>On new created elements such as:<br />$(&#39;&lt;img&gt;&#39;,{ src: &#39;mypic.gif&#39; });</p>
+<p>The element must be injected into the DOM before it is wrapped i.e:<br />$(&#39;&lt;img&gt;&#39;,{ src: &#39;mypic.gif&#39; }).appendTo(&#39;#mylist&#39;).wrap(&#39;&lt;li&gt;&#39;);</p>
+<p>And NOT! <br />$(&#39;&lt;img&gt;&#39;,{ src: &#39;mypic.gif&#39; }).wrap(&#39;&lt;/li&gt;&lt;li&gt;&#39;).appendTo(&#39;#mylist&#39;);&lt;/li&gt;</p>
+</div>
+        </div>
+    </li>
+
+    <ul class='children'>
+    <li class="comment odd alt depth-2" id="dsq-comment-8296">
+        <div id="dsq-comment-header-8296" class="dsq-comment-header">
+            <cite id="dsq-cite-8296">
+                <span id="dsq-author-user-8296">Yopraag</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8296" class="dsq-comment-body">
+            <div id="dsq-comment-message-8296" class="dsq-comment-message"><p>Correction to the bad example:<br />$(&#39;&lt;img&gt;&#39;,{ src: &#39;mypic.gif&#39; }).wrap(&#39;&lt;li&gt;&#39;).appendTo(&#39;#mylist&#39;);&lt;/li&gt;</p>
+</div>
+        </div>
+    </li>
+
+    </li>
+</ul>
+</li>
+            </ul>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://api.jquery.com/wrap/';
+    var disqus_identifier = '160 http://api.jquery.com/?p=160';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'jquery';
+    var disqus_title = ".wrap()";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=160';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+    var facebookXdReceiverPath = 'http://api.jquery.com/wp-content/plugins/disqus-comment-system/xd_receiver.htm';
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/api.jquery.com\/wrap\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+        dsq.src = 'http' + '://' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.73';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+</div>
+</div>
+    </div><!-- #content -->
+  </div><!-- #jq-primaryContent -->
+
+  <div id="jq-interiorNavigation" >
+    <h2 class="jq-clearfix roundTop section-title"><a href="/">jQuery API</a></h2>
+    <div class="roundBottom jq-box">
+      <ul class="xoxo">
+        <li>
+          <ul>
+            <li><a href="http://api.jquery.com/category/version/1.7/">New or Changed in 1.7</a></li>
+            <li><a href="http://api.jquery.com/api/" >Raw XML API Dump</a></li>
+            <li><a href="http://api.jquery.com/browser/">Dynamic API Browser</a></li>
+            <li><a href="http://www.packtpub.com/jquery-1-4-reference-guide/book">jQuery API Book</a></li>
+          </ul>
+      </ul>
+<!--
+      <br />
+      <div class="sideBarFeature">
+        <strong>Dynamic API Browser</strong>
+        <a href="http://api.jquery.com/browser/" style="border:0px;"><img src="http://static.jquery.com/api/images/badge.jpg" style="border:0px;width:100%;"/></a>
+      </div>
+      <div class="sideBarFeature">
+        <strong>jQuery API Book</strong>
+        <a href="http://www.packtpub.com/" style="border-width:0;"><img src="http://static.jquery.com/books/jquery-ref-guide.png" style="border-width:0;"/></a>
+      </div>
+-->
+    </div>
+
+    <h2 class="jq-clearfix roundTop section-title">Browse the jQuery API</h2>
+    <div class="roundBottom jq-box">
+    <ul class="xoxo">
+
+      <li id="categories">
+        <ul>
+        <li><a href="/">All</a></li>
+    <li class="cat-item cat-item-13"><a href="http://api.jquery.com/category/ajax/" title="View all posts filed under Ajax">Ajax</a>
+<ul class='children'>
+    <li class="cat-item cat-item-39"><a href="http://api.jquery.com/category/ajax/global-ajax-event-handlers/" title="View all posts filed under Global Ajax Event Handlers">Global Ajax Event Handlers</a>
+</li>
+    <li class="cat-item cat-item-40"><a href="http://api.jquery.com/category/ajax/helper-functions/" title="View all posts filed under Helper Functions">Helper Functions</a>
+</li>
+    <li class="cat-item cat-item-37"><a href="http://api.jquery.com/category/ajax/low-level-interface/" title="View all posts filed under Low-Level Interface">Low-Level Interface</a>
+</li>
+    <li class="cat-item cat-item-38"><a href="http://api.jquery.com/category/ajax/shorthand-methods/" title="View all posts filed under Shorthand Methods">Shorthand Methods</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-7"><a href="http://api.jquery.com/category/attributes/" title="View all posts filed under Attributes">Attributes</a>
+</li>
+    <li class="cat-item cat-item-99"><a href="http://api.jquery.com/category/callbacks-object/" title="View all posts filed under Callbacks Object">Callbacks Object</a>
+</li>
+    <li class="cat-item cat-item-5"><a href="http://api.jquery.com/category/core/" title="View all posts filed under Core">Core</a>
+</li>
+    <li class="cat-item cat-item-10"><a href="http://api.jquery.com/category/css/" title="View all posts filed under CSS">CSS</a>
+</li>
+    <li class="cat-item cat-item-51"><a href="http://api.jquery.com/category/data/" title="View all posts filed under Data">Data</a>
+</li>
+    <li class="cat-item cat-item-93"><a href="http://api.jquery.com/category/deferred-object/" title="View all posts filed under Deferred Object">Deferred Object</a>
+</li>
+    <li class="cat-item cat-item-97"><a href="http://api.jquery.com/category/deprecated/" title="View all posts filed under Deprecated">Deprecated</a>
+</li>
+    <li class="cat-item cat-item-50"><a href="http://api.jquery.com/category/dimensions/" title="View all posts filed under Dimensions">Dimensions</a>
+</li>
+    <li class="cat-item cat-item-12"><a href="http://api.jquery.com/category/effects/" title="View all posts filed under Effects">Effects</a>
+<ul class='children'>
+    <li class="cat-item cat-item-52"><a href="http://api.jquery.com/category/effects/basics/" title="View all posts filed under Basics">Basics</a>
+</li>
+    <li class="cat-item cat-item-55"><a href="http://api.jquery.com/category/effects/custom-effects/" title="View all posts filed under Custom">Custom</a>
+</li>
+    <li class="cat-item cat-item-54"><a href="http://api.jquery.com/category/effects/fading/" title="View all posts filed under Fading">Fading</a>
+</li>
+    <li class="cat-item cat-item-53"><a href="http://api.jquery.com/category/effects/sliding/" title="View all posts filed under Sliding">Sliding</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-11"><a href="http://api.jquery.com/category/events/" title="View all posts filed under Events">Events</a>
+<ul class='children'>
+    <li class="cat-item cat-item-36"><a href="http://api.jquery.com/category/events/browser-events/" title="View all posts filed under Browser Events">Browser Events</a>
+</li>
+    <li class="cat-item cat-item-32"><a href="http://api.jquery.com/category/events/document-loading/" title="View all posts filed under Document Loading">Document Loading</a>
+</li>
+    <li class="cat-item cat-item-31"><a href="http://api.jquery.com/category/events/event-handler-attachment/" title="View all posts filed under Event Handler Attachment">Event Handler Attachment</a>
+</li>
+    <li class="cat-item cat-item-66"><a href="http://api.jquery.com/category/events/event-object/" title="View all posts filed under Event Object">Event Object</a>
+</li>
+    <li class="cat-item cat-item-34"><a href="http://api.jquery.com/category/events/form-events/" title="View all posts filed under Form Events">Form Events</a>
+</li>
+    <li class="cat-item cat-item-35"><a href="http://api.jquery.com/category/events/keyboard-events/" title="View all posts filed under Keyboard Events">Keyboard Events</a>
+</li>
+    <li class="cat-item cat-item-33"><a href="http://api.jquery.com/category/events/mouse-events/" title="View all posts filed under Mouse Events">Mouse Events</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-56"><a href="http://api.jquery.com/category/forms/" title="View all posts filed under Forms">Forms</a>
+</li>
+    <li class="cat-item cat-item-67"><a href="http://api.jquery.com/category/internals/" title="View all posts filed under Internals">Internals</a>
+</li>
+    <li class="cat-item cat-item-9"><a href="http://api.jquery.com/category/manipulation/" title="View all posts filed under Manipulation">Manipulation</a>
+<ul class='children'>
+    <li class="cat-item cat-item-25"><a href="http://api.jquery.com/category/manipulation/class-attribute/" title="View all posts filed under Class Attribute">Class Attribute</a>
+</li>
+    <li class="cat-item cat-item-29"><a href="http://api.jquery.com/category/manipulation/copying/" title="View all posts filed under Copying">Copying</a>
+</li>
+    <li class="cat-item cat-item-28"><a href="http://api.jquery.com/category/manipulation/dom-insertion-around/" title="View all posts filed under DOM Insertion, Around">DOM Insertion, Around</a>
+</li>
+    <li class="cat-item cat-item-27"><a href="http://api.jquery.com/category/manipulation/dom-insertion-inside/" title="View all posts filed under DOM Insertion, Inside">DOM Insertion, Inside</a>
+</li>
+    <li class="cat-item cat-item-48"><a href="http://api.jquery.com/category/manipulation/dom-insertion-outside/" title="View all posts filed under DOM Insertion, Outside">DOM Insertion, Outside</a>
+</li>
+    <li class="cat-item cat-item-30"><a href="http://api.jquery.com/category/manipulation/dom-removal/" title="View all posts filed under DOM Removal">DOM Removal</a>
+</li>
+    <li class="cat-item cat-item-26"><a href="http://api.jquery.com/category/manipulation/dom-replacement/" title="View all posts filed under DOM Replacement">DOM Replacement</a>
+</li>
+    <li class="cat-item cat-item-23"><a href="http://api.jquery.com/category/manipulation/general-attributes/" title="View all posts filed under General Attributes">General Attributes</a>
+</li>
+    <li class="cat-item cat-item-24"><a href="http://api.jquery.com/category/manipulation/style-properties/" title="View all posts filed under Style Properties">Style Properties</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-41"><a href="http://api.jquery.com/category/miscellaneous/" title="View all posts filed under Miscellaneous">Miscellaneous</a>
+<ul class='children'>
+    <li class="cat-item cat-item-44"><a href="http://api.jquery.com/category/miscellaneous/collection-manipulation/" title="View all posts filed under Collection Manipulation">Collection Manipulation</a>
+</li>
+    <li class="cat-item cat-item-45"><a href="http://api.jquery.com/category/miscellaneous/data-storage/" title="View all posts filed under Data Storage">Data Storage</a>
+</li>
+    <li class="cat-item cat-item-43"><a href="http://api.jquery.com/category/miscellaneous/dom-element-methods/" title="View all posts filed under DOM Element Methods">DOM Element Methods</a>
+</li>
+    <li class="cat-item cat-item-42"><a href="http://api.jquery.com/category/miscellaneous/setup-methods/" title="View all posts filed under Setup Methods">Setup Methods</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-49"><a href="http://api.jquery.com/category/offset/" title="View all posts filed under Offset">Offset</a>
+</li>
+    <li class="cat-item cat-item-85"><a href="http://api.jquery.com/category/plugins/" title="View all posts filed under Plugins">Plugins</a>
+<ul class='children'>
+    <li class="cat-item cat-item-87"><a href="http://api.jquery.com/category/plugins/data-link/" title="View all posts filed under Data Link">Data Link</a>
+</li>
+    <li class="cat-item cat-item-83"><a href="http://api.jquery.com/category/plugins/templates/" title="View all posts filed under Templates">Templates</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-68"><a href="http://api.jquery.com/category/properties/" title="View all posts filed under Properties">Properties</a>
+<ul class='children'>
+    <li class="cat-item cat-item-59"><a href="http://api.jquery.com/category/properties/jquery-object-instance-properties/" title="View all posts filed under Properties of jQuery Object Instances">Properties of jQuery Object Instances</a>
+</li>
+    <li class="cat-item cat-item-58"><a href="http://api.jquery.com/category/properties/global-jquery-object-properties/" title="View all posts filed under Properties of the Global jQuery Object">Properties of the Global jQuery Object</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-6"><a href="http://api.jquery.com/category/selectors/" title="View all posts filed under Selectors">Selectors</a>
+<ul class='children'>
+    <li class="cat-item cat-item-17"><a href="http://api.jquery.com/category/selectors/attribute-selectors/" title="View all posts filed under Attribute">Attribute</a>
+</li>
+    <li class="cat-item cat-item-16"><a href="http://api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts filed under Basic">Basic</a>
+</li>
+    <li class="cat-item cat-item-61"><a href="http://api.jquery.com/category/selectors/basic-filter-selectors/" title="View all posts filed under Basic Filter">Basic Filter</a>
+</li>
+    <li class="cat-item cat-item-65"><a href="http://api.jquery.com/category/selectors/child-filter-selectors/" title="View all posts filed under Child Filter">Child Filter</a>
+</li>
+    <li class="cat-item cat-item-62"><a href="http://api.jquery.com/category/selectors/content-filter-selector/" title="View all posts filed under Content Filter">Content Filter</a>
+</li>
+    <li class="cat-item cat-item-18"><a href="http://api.jquery.com/category/selectors/form-selectors/" title="View all posts filed under Form">Form</a>
+</li>
+    <li class="cat-item cat-item-60"><a href="http://api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts filed under Hierarchy">Hierarchy</a>
+</li>
+    <li class="cat-item cat-item-96"><a href="http://api.jquery.com/category/selectors/jquery-selector-extensions/" title="View all posts filed under jQuery Extensions">jQuery Extensions</a>
+</li>
+    <li class="cat-item cat-item-63"><a href="http://api.jquery.com/category/selectors/visibility-filter-selectors/" title="View all posts filed under Visibility Filter">Visibility Filter</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-8"><a href="http://api.jquery.com/category/traversing/" title="View all posts filed under Traversing">Traversing</a>
+<ul class='children'>
+    <li class="cat-item cat-item-20"><a href="http://api.jquery.com/category/traversing/filtering/" title="View all posts filed under Filtering">Filtering</a>
+</li>
+    <li class="cat-item cat-item-22"><a href="http://api.jquery.com/category/traversing/miscellaneous-traversal/" title="View all posts filed under Miscellaneous Traversing">Miscellaneous Traversing</a>
+</li>
+    <li class="cat-item cat-item-21"><a href="http://api.jquery.com/category/traversing/tree-traversal/" title="View all posts filed under Tree Traversal">Tree Traversal</a>
+</li>
+</ul>
+</li>
+    <li class="cat-item cat-item-14"><a href="http://api.jquery.com/category/utilities/" title="View all posts filed under Utilities">Utilities</a>
+</li>
+    <li class="cat-item cat-item-69"><a href="http://api.jquery.com/category/version/" title="View all posts filed under Version">Version</a>
+<ul class='children'>
+    <li class="cat-item cat-item-70"><a href="http://api.jquery.com/category/version/1.0/" title="View all posts filed under Version 1.0">Version 1.0</a>
+</li>
+    <li class="cat-item cat-item-71"><a href="http://api.jquery.com/category/version/1.0.4/" title="View all posts filed under Version 1.0.4">Version 1.0.4</a>
+</li>
+    <li class="cat-item cat-item-72"><a href="http://api.jquery.com/category/version/1.1/" title="View all posts filed under Version 1.1">Version 1.1</a>
+</li>
+    <li class="cat-item cat-item-73"><a href="http://api.jquery.com/category/version/1.1.2/" title="View all posts filed under Version 1.1.2">Version 1.1.2</a>
+</li>
+    <li class="cat-item cat-item-74"><a href="http://api.jquery.com/category/version/1.1.3/" title="View all posts filed under Version 1.1.3">Version 1.1.3</a>
+</li>
+    <li class="cat-item cat-item-75"><a href="http://api.jquery.com/category/version/1.1.4/" title="View all posts filed under Version 1.1.4">Version 1.1.4</a>
+</li>
+    <li class="cat-item cat-item-76"><a href="http://api.jquery.com/category/version/1.2/" title="View all posts filed under Version 1.2">Version 1.2</a>
+</li>
+    <li class="cat-item cat-item-77"><a href="http://api.jquery.com/category/version/1.2.3/" title="View all posts filed under Version 1.2.3">Version 1.2.3</a>
+</li>
+    <li class="cat-item cat-item-78"><a href="http://api.jquery.com/category/version/1.2.6/" title="View all posts filed under Version 1.2.6">Version 1.2.6</a>
+</li>
+    <li class="cat-item cat-item-79"><a href="http://api.jquery.com/category/version/1.3/" title="View all posts filed under Version 1.3">Version 1.3</a>
+</li>
+    <li class="cat-item cat-item-80"><a href="http://api.jquery.com/category/version/1.4/" title="View all posts filed under Version 1.4">Version 1.4</a>
+</li>
+    <li class="cat-item cat-item-81"><a href="http://api.jquery.com/category/version/1.4.1/" title="View all posts filed under Version 1.4.1">Version 1.4.1</a>
+</li>
+    <li class="cat-item cat-item-82"><a href="http://api.jquery.com/category/version/1.4.2/" title="View all posts filed under Version 1.4.2">Version 1.4.2</a>
+</li>
+    <li class="cat-item cat-item-90"><a href="http://api.jquery.com/category/version/1.4.3/" title="View all posts filed under Version 1.4.3">Version 1.4.3</a>
+</li>
+    <li class="cat-item cat-item-91"><a href="http://api.jquery.com/category/version/1.4.4/" title="View all posts filed under Version 1.4.4">Version 1.4.4</a>
+</li>
+    <li class="cat-item cat-item-92"><a href="http://api.jquery.com/category/version/1.5/" title="View all posts filed under Version 1.5">Version 1.5</a>
+</li>
+    <li class="cat-item cat-item-94"><a href="http://api.jquery.com/category/version/1.5.1/" title="View all posts filed under Version 1.5.1">Version 1.5.1</a>
+</li>
+    <li class="cat-item cat-item-95"><a href="http://api.jquery.com/category/version/1.6/" title="View all posts filed under Version 1.6">Version 1.6</a>
+</li>
+    <li class="cat-item cat-item-98"><a href="http://api.jquery.com/category/version/1.7/" title="View all posts filed under Version 1.7">Version 1.7</a>
+</li>
+</ul>
+</li>
+        </ul>
+      </li>
+
+  </ul>
+  </div>
+  </div><!-- #jq-interiorNavigation -->
+  </div><!-- /#secondaryNavigation -->
+
+  <div id="jq-footer" class="jq-clearfix">
+    <div id="jq-credits">
+<p id="jq-copyright">&copy; <?= date('Y'); ?> <a href="http://jquery.org/">The jQuery Foundation</a></p>
+<p id="jq-hosting">Sponsored by <a href="http://mediatemple.net" class="jq-mediaTemple">Media Temple</a> and <a href="http://jquery.org/sponsors">others</a>.</p>
+    </div>
+
+    <div id="jq-footerNavigation">
+      <ul>
+        <li class="jq-download jq-first"><a href="http://docs.jquery.com/Downloading_jQuery">Download</a></li>
+        <li class="jq-documentation"><a href="http://docs.jquery.com">Documentation</a></li>
+        <li class="jq-tutorials"><a href="http://docs.jquery.com/Tutorials">Tutorials</a></li>
+        <li class="jq-bugTracker"><a href="http://bugs.jquery.com/">Bug Tracker</a></li>
+        <li class="jq-discussion jq-last"><a href="http://docs.jquery.com/Discussion">Discussion</a></li>
+      </ul>
+    </div><!-- /#jq-footerNavigation -->
+  </div><!-- /#jq-footer -->
+</div><!-- /#siteContain -->
+
+<script type="text/javascript">
+var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1076265-1']); _gaq.push(['_trackPageview']); _gaq.push(['_setDomainName', '.jquery.com']);
+(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);})();
+</script>
+
+  <script src="http://static.jquery.com/api/prettify.js"></script>
+  <!-- <script src="/wp-content/themes/jquery.0002/demos.js?v=20110228"></script> -->
+  <script src="http://static.jquery.com/api/demo.js?v=20110228"></script>
+</body>
+</html>
+
+<!-- Dynamic page generated in 0.160 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2012-07-19 10:23:01 -->
+<!-- Compression = gzip -->

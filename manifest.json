@@ -1,0 +1,34 @@
+{
+  "name": "icyEE",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "The webpage English terms level analysic tool.",
+  "browser_action": {
+    "default_icon": "icon.png"
+    // , "default_popup": "popup.html"
+  },
+  "background": {
+    // "page": "background.html"
+    "scripts": ["background.js"]
+    // "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["jquery.js", "underscore-min.js", "english-7000.js", "GRE_1000_basic.js", "GRE_500_advance.js", "eee.js"]
+    }
+  ],
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ]
+}
+
+
+// todo:
+// passing selected text to popup.html
+// display basic analysic info in popup.html (Levels, total sum)
+// those info are expentable, include those word.
+// make sure Google Dictionary can work on pupop.
+
+// give up insert html, it's weird.
+// method B: generate new Text-only page, with custom css and tag. Not conflict with method A.
