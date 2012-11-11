@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*"],
+      "matches": ["http://*/*", "https://*/*", "ftp://*/*", "file://*/*"],
       "js": ["jquery.js", "underscore-min.js", "english-7000.js", "GRE_1000_basic.js", "GRE_500_advance.js", "eee.js"]
     }
   ],
@@ -24,11 +24,20 @@
 }
 
 
-// todo:
-// passing selected text to popup.html
-// display basic analysic info in popup.html (Levels, total sum)
-// those info are expentable, include those word.
-// make sure Google Dictionary can work on pupop.
+/*
+todo:
+passing selected text to popup.html
+display basic analysic info in popup.html (Levels, total sum)
+those info are expentable, include those word.
+make sure Google Dictionary can work on pupop.
 
-// give up insert html, it's weird.
-// method B: generate new Text-only page, with custom css and tag. Not conflict with method A.
+give up insert html, it's weird.
+method B: generate new Text-only page, with custom css and tag. Not conflict with method A.
+
+popup還是吃屎去吧。
+
+use iframe on translate page.
+Define layout function in eeejs.
+and define another message event.
+
+*/

@@ -2,30 +2,51 @@
 // english_7000[level]
 // 土法煉鋼以至於越長越肥，不過這邊能用就好。
 
+
 // try stackoverflow tutor-01.
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if (request.method == "getSelection")
-      sendResponse({data: window.getSelection().toString()});
-    else
-      sendResponse({}); // snub them.
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getSelection") {
+        var select_text = window.getSelection().toString();
+
+        // if contain iframe, add iframe's getSelection
+        var iframes = $('iframe');
+        if (iframes.length > 0) {
+            var selects = iframes.map(function(){
+                // console.log('iframes.map this:'+this);
+                // this.contentWindow.document; 在 Mac 上不適用。嘗試一下jQuery.contents也失敗。
+                var idoc = this.contentDocument; // || this.contentWindow.document;
+                if (idoc !== null) {
+                    return idoc.getSelection().toString();
+                } else {
+                    return '';
+                }
+            });
+            select_text += selects.get().join(' ');
+        }
+
+        sendResponse({data: select_text});
+        // startCount(select_text);
+
+    } else if (request.method == "ami") { // try get Message in google translate.
+        console.log('Hello parseText');
+        sendResponse({data:'get the mission'});
+    } else {
+        sendResponse({});  // snub them.
+    }
 });
 // try stackoverflow tutor-1.
 
-
-chrome.extension.sendMessage({greeting: "hello"}, function(response) {
-  console.log(response.farewell);
-});
-
 // because english_7000 are sorted, we can use better search algorithm.
 var getIndexOf = function(words, word) {
-    var wordnum = words.length, index = 0, upperbound = wordnum-1, lowerbound = 0, old_index = 0;
+    var lowercase_word = word.toLowerCase() , wordnum = words.length, index = 0, upperbound = wordnum-1, lowerbound = 0, old_index = 0;
+
     index = Math.floor( wordnum / 2 );
     while (true) {
         old_index = index;
-        if ( words[index].toLowerCase() > word ) { 
+        if ( words[index].toLowerCase() > lowercase_word ) {
             upperbound = index;
             index = Math.floor((lowerbound + index) / 2);
-        } else if ( words[index].toLowerCase() < word ) { 
+        } else if ( words[index].toLowerCase() < lowercase_word ) {
             lowerbound = index;
             index = Math.floor((upperbound + index) / 2);
         } else {
@@ -55,7 +76,7 @@ var getLevel = function(word) {
             if ( remove_es > 0 ) { return remove_es; }
             if ( word[word.length-3] === 'i' ) {  // -ies
                 remove_ies_add_y = getLevel( word.slice(0, word.length - 3) + 'y' );
-                if ( remove_ies_add_y > 0 ) { return remove_ies_add_y; }                
+                if ( remove_ies_add_y > 0 ) { return remove_ies_add_y; }
             }
         } else if (( word[word.length-2] === "'" )||( word[word.length-2] === "’" )) {  // -'s or -’s
             remove_quots = getLevel( word.slice(0, word.length - 2) );
@@ -68,7 +89,7 @@ var getLevel = function(word) {
         if ( remove_d > 0 ) { return remove_d; }
         if ( word[word.length-3] === 'i' ) {  // -ied
             remove_ied_add_y = getLevel( word.slice(0, word.length - 3) + 'y' );
-            if ( remove_ied_add_y > 0 ) { return remove_ied_add_y; }                
+            if ( remove_ied_add_y > 0 ) { return remove_ied_add_y; }
         }
     } else if ( word.slice(word.length-2, word.length) === 'ly' ) {
         remove_ly = getLevel( word.slice(0, word.length - 2) );
@@ -106,20 +127,21 @@ var eee_colors = [
     'rgba(255,200,200,0.8)'
 ];
 
-var startCount = function() {
+var startCount = function(selected_text) {
     var words, words_level, sum, analytic, word_box;
-    words = $('body').text().split(/[0-9\=\`\~\!\@\#\$\%\^\&\*\(\)\_\+\s<>\,\.\\\/\"\;\:\|\[\]\{\}\?\■\…\♦\–\»\▼\“\”\—]+/);
-    words = _.map( words, function(word) { return word.toLowerCase().replace(/^['"]|['"]$/g,''); });
+    words = selected_text.split(/[0-9\=\`\~\!\@\#\$\%\^\&\*\(\)\_\+\s<>\,\.\\\/\"\;\:\|\[\]\{\}\?\■\…\♦\–\»\▼\“\”\—]+/);
+    words = _.map( words, function(word) { return word.replace(/^['"]|['"]$/g,''); });
+    // words = _.map( words, function(word) { return word.toLowerCase().replace(/^['"]|['"]$/g,''); });
     analytic = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     word_box = [[],[],[],[],[],[],[],[],[],[]];
-    words_level = _.map( _.uniq(words), function(word) { 
+    words_level = _.map( _.uniq(words), function(word) {
         var level = getLevel(word);
         word_box[level].push(word);
         return level;
     });
     sum = _.reduce( words_level, function(score, level) {
         analytic[level] += 1;
-        return score + level; 
+        return score + level;
     }, 0);
 
     console.log(
@@ -138,6 +160,13 @@ var startCount = function() {
 };
 window.startCount = startCount;
 
+// try run startCount in google translate.
+var text_in_gt, host = location.host;
+if (host === "translate.google.com") {
+    text_in_gt = $('#source').val();
+    startCount(text_in_gt);
+}
+
 
 var ttt = [];
 var firebrand = function($el, word) {
@@ -153,8 +182,5 @@ var firebrand = function($el, word) {
 
 window.firebrand = firebrand;
 
-$(function() {
-    startCount();
-});
 
 // $('p.hidden:contains("click here")').html().replace('click here', '<a href="url">click here</a>');

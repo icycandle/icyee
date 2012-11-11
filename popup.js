@@ -1,6 +1,20 @@
 // Copyright (c) 2012 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+
+var tabid = 0;
+chrome.tabs.getCurrent(function(tab){ tabid = tab.id; });
+alert(tabid);
+
+chrome.windows.getCurrent(function(w) {
+    chrome.tabs.getSelected(w.id,
+    function (response){
+        alert(response.url);
+    });
+});
+
+chrome.tabs.create( {url: 'hello'} );
+
 /*
 var req = new XMLHttpRequest();
 req.open(
