@@ -23,5 +23,23 @@ chrome.tabs.onRemoved.addListener( function(tabid, info) {
     translate_tabid = false;
   }
 });
-
 // try stackoverflow tutor-02.
+
+// http://stackoverflow.com/questions/6382467/chrome-extension-context-menus-how-to-display-a-menu-item-only-when-there-is-no
+var select_text;
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+  sendServiceRequest(select_text);
+});
+
+chrome.contextMenus.create({
+  "title": "icyEE selection text",
+  "contexts":["selection"]
+});
+
+chrome.extension.onRequest.addListener(function(request) {
+  if(request.cmd === "createSelectionMenu") {
+    select_text = request.data;
+  }
+});
+
+// todo: study http://developer.chrome.com/stable/extensions/event_pages.html

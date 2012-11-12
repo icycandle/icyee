@@ -1,27 +1,35 @@
-// english_7000[level]
+
+//right click menu
+document.addEventListener("mousedown", function(event){
+    if(event.button == 2) {
+      var select_text = getSelectionInPage();
+      chrome.extension.sendRequest({cmd: "createSelectionMenu", data:select_text});
+    }
+}, true);
+
+var getSelectionInPage = function() {
+  var select_text = window.getSelection().toString();
+  // if contain iframe, add iframe's getSelection
+  var iframes = $('iframe');
+  if(iframes.length > 0) {
+    var selects = iframes.map(function() {
+      var idoc = this.contentDocument;
+      if(idoc !== null) {
+        return idoc.getSelection().toString();
+      } else {
+        return '';
+      }
+    });
+    select_text += selects.get().join(' ');
+  }
+  return select_text;
+};
+
 // try stackoverflow tutor-01.
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.method == "getSelection") {
-    var select_text = window.getSelection().toString();
-
-    // if contain iframe, add iframe's getSelection
-    var iframes = $('iframe');
-    if(iframes.length > 0) {
-      var selects = iframes.map(function() {
-        var idoc = this.contentDocument;
-        if(idoc !== null) {
-          return idoc.getSelection().toString();
-        } else {
-          return '';
-        }
-      });
-      select_text += selects.get().join(' ');
-    }
-
-    sendResponse({
-      data: select_text
-    });
-    // startCount(select_text);
+    var select_text = getSelectionInPage();
+    sendResponse({ data: select_text });
   } else {
     sendResponse({}); // snub them.
   }
@@ -102,10 +110,14 @@ var getLevel = function(word) {
         }
       }
     } else if(word.slice(word.length - 3, word.length) === 'ing') {
-      ii = getLevel(word.slice(0, word.length - 3)); // remove_ing
+      ii = getLevel(word.slice(0, word.length - 3)); // ex: going -> go
       if (ii > 0) { return ii; }
-      ii = getLevel(word.slice(0, word.length - 3) + 'e'); // remove_ing_add_e
+      ii = getLevel(word.slice(0, word.length - 3) + 'e'); // ex: hiding -> hide
       if (ii > 0) { return ii; }
+      if (word[word.length - 4] === word[word.length - 5]) {
+        ii = getLevel(word.slice(0, word.length - 4)); // ex: mapping -> map
+        if (ii > 0) { return ii; }
+      }
     } else if(word.slice(word.length - 3, word.length) === 'est') {
       ii = getLevel(word.slice(0, word.length - 3)); // remove_est
       if (ii > 0) { return ii; }
@@ -117,10 +129,10 @@ var getLevel = function(word) {
       }
     } else {}
 
-    if(word.slice(word.length - 4, word.length) === 'ment') {
-      ii = getLevel(word.slice(0, word.length - 4)); // remove_ment
-      if (ii > 0) { return ii; }
-    }
+    // if(word.slice(word.length - 4, word.length) === 'ment') {
+    //   ii = getLevel(word.slice(0, word.length - 4)); // remove_ment
+    //   if (ii > 0) { return ii; }
+    // }
 
     if(word.slice(word.length - 4, word.length) === 'less') {
       ii = getLevel(word.slice(0, word.length - 4)); // remove_less
