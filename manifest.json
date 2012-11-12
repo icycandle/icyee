@@ -1,16 +1,16 @@
 {
   "name": "icyEE",
-  "version": "1.0",
+  "version": "0.1.7.2",
   "manifest_version": 2,
-  "description": "The webpage English terms level analysic tool.",
+  "description": "This tool is design for analysic term's level in English webpage (for Chinese User).",
+  "icons": {
+    "128": "icon_128.png"
+  },
   "browser_action": {
     "default_icon": "icon.png"
-    // , "default_popup": "popup.html"
   },
   "background": {
-    // "page": "background.html"
     "scripts": ["background.js"]
-    // "persistent": false
   },
   "content_scripts": [
     {
@@ -22,22 +22,3 @@
     "tabs", "http://*/*", "https://*/*"
   ]
 }
-
-
-/*
-todo:
-passing selected text to popup.html
-display basic analysic info in popup.html (Levels, total sum)
-those info are expentable, include those word.
-make sure Google Dictionary can work on pupop.
-
-give up insert html, it's weird.
-method B: generate new Text-only page, with custom css and tag. Not conflict with method A.
-
-popup還是吃屎去吧。
-
-use iframe on translate page.
-Define layout function in eeejs.
-and define another message event.
-
-*/

@@ -1,186 +1,183 @@
-
 // english_7000[level]
-// 土法煉鋼以至於越長越肥，不過這邊能用就好。
-
-
 // try stackoverflow tutor-01.
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.method == "getSelection") {
-        var select_text = window.getSelection().toString();
+  if(request.method == "getSelection") {
+    var select_text = window.getSelection().toString();
 
-        // if contain iframe, add iframe's getSelection
-        var iframes = $('iframe');
-        if (iframes.length > 0) {
-            var selects = iframes.map(function(){
-                // console.log('iframes.map this:'+this);
-                // this.contentWindow.document; 在 Mac 上不適用。嘗試一下jQuery.contents也失敗。
-                var idoc = this.contentDocument; // || this.contentWindow.document;
-                if (idoc !== null) {
-                    return idoc.getSelection().toString();
-                } else {
-                    return '';
-                }
-            });
-            select_text += selects.get().join(' ');
+    // if contain iframe, add iframe's getSelection
+    var iframes = $('iframe');
+    if(iframes.length > 0) {
+      var selects = iframes.map(function() {
+        var idoc = this.contentDocument;
+        if(idoc !== null) {
+          return idoc.getSelection().toString();
+        } else {
+          return '';
         }
-
-        sendResponse({data: select_text});
-        // startCount(select_text);
-
-    } else if (request.method == "ami") { // try get Message in google translate.
-        console.log('Hello parseText');
-        sendResponse({data:'get the mission'});
-    } else {
-        sendResponse({});  // snub them.
+      });
+      select_text += selects.get().join(' ');
     }
+
+    sendResponse({
+      data: select_text
+    });
+    // startCount(select_text);
+  } else {
+    sendResponse({}); // snub them.
+  }
 });
 // try stackoverflow tutor-1.
-
 // because english_7000 are sorted, we can use better search algorithm.
 var getIndexOf = function(words, word) {
-    var lowercase_word = word.toLowerCase() , wordnum = words.length, index = 0, upperbound = wordnum-1, lowerbound = 0, old_index = 0;
+    var lowercase_word = word.toLowerCase(),
+      wordnum = words.length,
+      index = 0,
+      upperbound = wordnum - 1,
+      lowerbound = 0,
+      old_index = 0;
 
-    index = Math.floor( wordnum / 2 );
-    while (true) {
-        old_index = index;
-        if ( words[index].toLowerCase() > lowercase_word ) {
-            upperbound = index;
-            index = Math.floor((lowerbound + index) / 2);
-        } else if ( words[index].toLowerCase() < lowercase_word ) {
-            lowerbound = index;
-            index = Math.floor((upperbound + index) / 2);
-        } else {
-            return index;
-        }
-        // console.log("\tlowerbound:"+lowerbound+"\tindex:"+index+"upperbound:"+upperbound+"\tvs. "+words[old_index]);
-        if (old_index === index) { break; }
+    index = Math.floor(wordnum / 2);
+    while(true) {
+      old_index = index;
+      if(words[index].toLowerCase() > lowercase_word) {
+        upperbound = index;
+        index = Math.floor((lowerbound + index) / 2);
+      } else if(words[index].toLowerCase() < lowercase_word) {
+        lowerbound = index;
+        index = Math.floor((upperbound + index) / 2);
+      } else {
+        return index;
+      }
+      // console.log("\tlowerbound:"+lowerbound+"\tindex:"+index+"upperbound:"+upperbound+"\tvs. "+words[old_index]);
+      if(old_index === index) {
+        break;
+      }
     }
-    return -1 ;
-};
-
+    return -1;
+  };
 
 var getLevel = function(word) {
-    var level, remove_s = 0, remove_es = 0, remove_quots = 0, remove_ed = 0, remove_d = 0, remove_ly = 0, remove_ing = 0, remove_ing_add_e = 0, remove_ies_add_y = 0, remove_ied_add_y = 0, remove_xest = 0, remove_est = 0, remove_est_add_e = 0, remove_ment = 0;
-    for (level=1; level<=9; level++) {
-        // if ( english_7000[level].indexOf(word) >= 0 ) {
-        if ( getIndexOf(english_7000[level], word) >= 0 ) {
-            return level;
-        }
+    var level, ii;
+    for(level = 1; level <= 9; level++) {
+      if(getIndexOf(english_7000[level], word) >= 0) {
+        return level;
+      }
     }
 
-    if ( word[word.length-1] === 's' ) {
-        remove_s = getLevel( word.slice(0, word.length - 1) );
-        if ( remove_s > 0 ) { return remove_s; }
-        if ( word[word.length-2] === 'e' ) {  // -es
-            remove_es = getLevel( word.slice(0, word.length - 2) );
-            if ( remove_es > 0 ) { return remove_es; }
-            if ( word[word.length-3] === 'i' ) {  // -ies
-                remove_ies_add_y = getLevel( word.slice(0, word.length - 3) + 'y' );
-                if ( remove_ies_add_y > 0 ) { return remove_ies_add_y; }
-            }
-        } else if (( word[word.length-2] === "'" )||( word[word.length-2] === "’" )) {  // -'s or -’s
-            remove_quots = getLevel( word.slice(0, word.length - 2) );
-            if ( remove_quots > 0 ) { return remove_quots; }
+    if(word[word.length - 1] === 's') {
+      ii = getLevel(word.slice(0, word.length - 1)); // remove_s
+      if (ii > 0) { return ii; }
+      if(word[word.length - 2] === 'e') {
+        ii = getLevel(word.slice(0, word.length - 2)); // remove_es
+        if (ii > 0) { return ii; }
+        if(word[word.length - 3] === 'i') {
+          ii = getLevel(word.slice(0, word.length - 3) + 'y'); // remove_ies_add_y
+          if (ii > 0) { return ii; }
         }
-    } else if ( word.slice(word.length-2, word.length) === 'ed' ) {
-        remove_ed = getLevel( word.slice(0, word.length - 2) );
-        if ( remove_ed > 0 ) { return remove_ed; }
-        remove_d = getLevel( word.slice(0, word.length - 1) );
-        if ( remove_d > 0 ) { return remove_d; }
-        if ( word[word.length-3] === 'i' ) {  // -ied
-            remove_ied_add_y = getLevel( word.slice(0, word.length - 3) + 'y' );
-            if ( remove_ied_add_y > 0 ) { return remove_ied_add_y; }
+      } else if((word[word.length - 2] === "'") || (word[word.length - 2] === "’")) {
+        ii = getLevel(word.slice(0, word.length - 2)); // remove -'s or -’s
+        if (ii > 0) { return ii; }
+      }
+    } else if(word.slice(word.length - 2, word.length) === 'ed') {
+      ii = getLevel(word.slice(0, word.length - 2)); // remove_ed
+      if (ii > 0) { return ii; }
+      ii = getLevel(word.slice(0, word.length - 1)); // remove_d
+      if (ii > 0) { return ii; }
+      if(word[word.length - 3] === 'i') { // -ied
+        ii = getLevel(word.slice(0, word.length - 3) + 'y'); // remove_ied_add_y
+        if (ii > 0) { return ii; }
+      }
+    }  else if ((word.slice(word.length - 2, word.length) === 'en') && (word[word.length - 3] === word[word.length - 4])) {
+      ii = getLevel(word.slice(0, word.length - 3) + 'e'); // ex: hidden -> hide
+      if (ii > 0) { return ii; }
+    } else if(word.slice(word.length - 1, word.length) === 'y') {
+      ii = getLevel(word.slice(0, word.length - 1)); // remove_y
+      if (ii > 0) { return ii; }
+      if(word.slice(word.length - 2, word.length) === 'ly') {
+        ii = getLevel(word.slice(0, word.length - 2)); // remove_ly
+        if (ii > 0) { return ii; }
+        if(word[word.length - 3] === 'i') {
+          ii = getLevel(word.slice(0, word.length - 3) + 'y'); // remove_ily_add_y
+          if (ii > 0) { return ii; }
         }
-    } else if ( word.slice(word.length-2, word.length) === 'ly' ) {
-        remove_ly = getLevel( word.slice(0, word.length - 2) );
-        if ( remove_ly > 0 ) { return remove_ly; }
-    } else if ( word.slice(word.length-3, word.length) === 'ing' ) {
-        remove_ing = getLevel( word.slice(0, word.length - 3) );
-        if ( remove_ing > 0 ) { return remove_ing; }
-        remove_ing_add_e = getLevel( word.slice(0, word.length - 3)+'e' );
-        if ( remove_ing_add_e > 0 ) { return remove_ing_add_e; }
-    } else if ( word.slice(word.length-3, word.length) === 'est' ) {
-        remove_est = getLevel( word.slice(0, word.length - 3) );
-        if ( remove_est > 0 ) { return remove_est; }
-        remove_est_add_e = getLevel( word.slice(0, word.length - 3) + 'e' );
-        if ( remove_est_add_e > 0 ) { return remove_est_add_e; }
-        if (word[word.length-4] === word[word.length-5]) {  // like biggest
-            remove_xest = getLevel( word.slice(0, word.length - 4) );
-            if ( remove_xest > 0 ) { return remove_xest; }
-        }
-    } else if ( word.slice(word.length-4, word.length) === 'ment' ) {
-        remove_ment = getLevel( word.slice(0, word.length - 4) );
-        if ( remove_ment > 0 ) { return remove_ment; }
+      }
+    } else if(word.slice(word.length - 3, word.length) === 'ing') {
+      ii = getLevel(word.slice(0, word.length - 3)); // remove_ing
+      if (ii > 0) { return ii; }
+      ii = getLevel(word.slice(0, word.length - 3) + 'e'); // remove_ing_add_e
+      if (ii > 0) { return ii; }
+    } else if(word.slice(word.length - 3, word.length) === 'est') {
+      ii = getLevel(word.slice(0, word.length - 3)); // remove_est
+      if (ii > 0) { return ii; }
+      ii = getLevel(word.slice(0, word.length - 3) + 'e'); // remove_est_add_e
+      if (ii > 0) { return ii; }
+      if(word[word.length - 4] === word[word.length - 5]) {
+        ii = getLevel(word.slice(0, word.length - 4)); // ex: biggest -> big
+        if (ii > 0) { return ii; }
+      }
+    } else {}
+
+    if(word.slice(word.length - 4, word.length) === 'ment') {
+      ii = getLevel(word.slice(0, word.length - 4)); // remove_ment
+      if (ii > 0) { return ii; }
+    }
+
+    if(word.slice(word.length - 4, word.length) === 'less') {
+      ii = getLevel(word.slice(0, word.length - 4)); // remove_less
+      if (ii > 0) { return ii; }
     }
     return 0;
-};
+  };
 
 window.getLevel = getLevel;
 
-var eee_colors = [
-    'rgba(255,200,200,0.1)',
-    'rgba(255,200,200,0.3)',
-    'rgba(255,200,200,0.4)',
-    'rgba(255,200,200,0.5)',
-    'rgba(255,200,200,0.6)',
-    'rgba(255,200,200,0.7)',
-    'rgba(255,200,200,0.8)'
-];
 
 var startCount = function(selected_text) {
-    var words, words_level, sum, analytic, word_box;
-    words = selected_text.split(/[0-9\=\`\~\!\@\#\$\%\^\&\*\(\)\_\+\s<>\,\.\\\/\"\;\:\|\[\]\{\}\?\■\…\♦\–\»\▼\“\”\—]+/);
-    words = _.map( words, function(word) { return word.replace(/^['"]|['"]$/g,''); });
-    // words = _.map( words, function(word) { return word.toLowerCase().replace(/^['"]|['"]$/g,''); });
-    analytic = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    word_box = [[],[],[],[],[],[],[],[],[],[]];
-    words_level = _.map( _.uniq(words), function(word) {
-        var level = getLevel(word);
-        word_box[level].push(word);
-        return level;
+    var i, words, words_level, sum, analytic, word_box, info_text, info_html, level_name, analytic_html;
+    words = selected_text.split(/[0-9\=\`\~\!\@\#\$\%\^\&\*\(\)\_\+\s<>\,\.\\\/\"\;\:\|\[\]\{\}\?\■\…\♦\–\»\▼\“\”\—\‘\’]+/);
+    words = _.map(words, function(word) {
+      return word.replace(/^['"]|['"]$/g, '');
     });
-    sum = _.reduce( words_level, function(score, level) {
-        analytic[level] += 1;
-        return score + level;
+    analytic = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    word_box = [[], [], [], [], [], [], [], [], [], []];
+    level_name = ['undefined', 'level 1', 'level 2', 'level 3', 'level 4', 'level 5', 'level 6', 'Toefl-500', 'GRE-basic-1000', 'GRE-advence-500'];
+    words_level = _.map(_.uniq(words), function(word) {
+      var level = getLevel(word);
+      word_box[level].push(word);
+      return level;
+    });
+    sum = _.reduce(words_level, function(score, level) {
+      analytic[level] += 1;
+      return score + level;
     }, 0);
 
-    console.log(
-        "sum:" + sum + "\nanalytic:" + analytic + "\nword_box:\n" +
-        "\n\nlevel 1:\t" + word_box[1].join(', ') +
-        "\n\nlevel 2:\t" + word_box[2].join(', ') +
-        "\n\nlevel 3:\t" + word_box[3].join(', ') +
-        "\n\nlevel 4:\t" + word_box[4].join(', ') +
-        "\n\nlevel 5:\t" + word_box[5].join(', ') +
-        "\n\nlevel 6:\t" + word_box[6].join(', ') +
-        "\n\nlevel Toefl-500:\t" + word_box[7].join(', ') +
-        "\n\nlevel GRE-basic-1000:\t" + word_box[8].join(', ') +
-        "\n\nlevel GRE-advence-500:\t" + word_box[9].join(', ') +
-        "\n\nlevel 0:\t" + word_box[0].join(', ')
-        );
-};
+    info_html = "<h1>sum of level*wordsNum : <span class='icyee_num'>" + sum + "</span></h1>";
+
+    for(i = 1; i <= 9; i++) {
+      if(i === 9) { i = 0; }
+      if(word_box[i].length > 0) {
+        info_html += "<h3>" + level_name[i] + ": (<span class='icyee_num'>" + word_box[i].length + "</span>)</h3><span class='icyee_word'>";
+        info_html += word_box[i].join("</span>, <span class='icyee_word'>") + "</span>";
+      }
+      if(i === 0) { break; }
+    }
+
+    if($('#icyee_text').length === 0) {
+      $('body').append('<iframe id="icyee_text" />');
+    }
+
+    $('#icyee_text').width('96%').height(400).css('margin', '0 17px 40px 17px').contents().find('body').css('background', '#ffc').html(info_html).find('.icyee_num').css('color', 'maroon').parent('body').find('.icyee_word').css('color', '#333');
+
+    var icyee_text_height = $('#icyee_text').contents().find('body').height() + 24;
+    $('#icyee_text').height(icyee_text_height);
+  };
 window.startCount = startCount;
 
-// try run startCount in google translate.
-var text_in_gt, host = location.host;
-if (host === "translate.google.com") {
-    text_in_gt = $('#source').val();
-    startCount(text_in_gt);
-}
-
-
-var ttt = [];
-var firebrand = function($el, word) {
-    $el.contents().each(function () {
-        if (this.nodeType == 3) { // Text only
-            var t = $(this).text();
-            console.log(t);
-        } else { // Child element
-           firebrand($(this), word);
-        }
-    });
-};
-
-window.firebrand = firebrand;
-
-
-// $('p.hidden:contains("click here")').html().replace('click here', '<a href="url">click here</a>');
+// run startCount in google translate.
+var getHashText = function() {
+    if(location.host === "translate.google.com") {
+      startCount(location.hash.slice(10)); // slice(10) remove "#en/zh-TW/"
+    }
+  };
+$(getHashText);
+$(window).bind('hashchange', getHashText);
