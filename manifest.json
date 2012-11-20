@@ -1,8 +1,8 @@
 {
   "name": "icyEE",
-  "version": "0.1.7.3",
+  "version": "0.1.7.5",
   "manifest_version": 2,
-  "description": "This tool is design for analysic term's level in English webpage (for Chinese User).",
+  "description": "This tool is designed for analytic terms level in English web page (for Chinese User).",
   "icons": {
     "16": "icon_16.png",
     "128": "icon_128.png"
